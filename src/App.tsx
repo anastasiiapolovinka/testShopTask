@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box, Container, Stack } from '@mui/material';
+import './App.scss';
+import Aside from './components/Aside';
+import Header from './components/Header';
+import ProductList from './components/ProductList';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Product from './components/Product';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <ProductList />,
+  }, 
+  {
+    path: "/product/:productId",
+    element: <Product />,
+  }
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box>
+      <Header />
+      <Container maxWidth='xl'>
+        <Stack direction="row" justifyContent="space-between" sx={{paddingTop: '100px'}}>
+          <Aside />
+          <RouterProvider router={router} />
+        </Stack>
+      </Container>
+    </Box>
   );
 }
 
